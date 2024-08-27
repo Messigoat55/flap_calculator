@@ -30,16 +30,16 @@ try:
 
     st.write("Input data prepared.")
 
-    # Predict outcomes
-    if st.button("Predict Outcomes"):
-        st.write("Predicting outcomes...")
-        predictions = model.predict(input_data)
-        outcomes = ["Infection", "Necrosis", "Congestion", "Seroma", "Hematoma", "Dehiscence", "Hospital Readmission"]
-        
-        # Display predictions
-        st.subheader("Predicted Complication Probabilities:")
-        for i, outcome in enumerate(outcomes):
-            st.write(f"{outcome}: {'Yes' if predictions[0][i] == 1 else 'No'}")
-except Exception as e:
-    st.write(f"An error occurred: {e}")
+# Predict probabilities of outcomes
+if st.button("Predict Outcomes"):
+    st.write("Predicting outcomes...")
+    probabilities = model.predict_proba(input_data)
+
+    outcomes = ["Infection", "Necrosis", "Congestion", "Seroma", "Hematoma", "Dehiscence", "Hospital Readmission"]
+    
+    # Display predicted probabilities
+    st.subheader("Predicted Complication Probabilities:")
+    for i, outcome in enumerate(outcomes):
+        st.write(f"{outcome}: {probabilities[i][0][1] * 100:.2f}% chance")
+
 
