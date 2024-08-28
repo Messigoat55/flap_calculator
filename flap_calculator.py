@@ -93,4 +93,10 @@ try:
             st.write(f"**{outcome}**: {probabilities[i][0][1] * 100:.2f}% chance")
 
 except Exception as e:
-    st.error(f"An 
+    st.error(f"An error occurred: {e}")
+
+# Close the main container
+st.markdown('</div>', unsafe_allow_html=True)
+
+# Footer
+st.markdown('<div class="footer">© 2024 X University - All Rights Reserved</div>', unsafe_allow_html=True)
