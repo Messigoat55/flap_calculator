@@ -9,12 +9,15 @@ st.set_page_config(page_title="Leg Flap Risk Calculator", layout="centered", pag
 st.markdown(
     """
     <style>
+        /* Main styling */
         .main {
             background-color: #f0f4f8;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
+        /* Header and subheader styling */
         .header {
             color: #2c3e50;
             font-size: 36px;
@@ -28,6 +31,8 @@ st.markdown(
             text-align: center;
             margin-bottom: 20px;
         }
+
+        /* Button styling */
         .stButton>button {
             background-color: #2c3e50;
             color: white;
@@ -43,17 +48,30 @@ st.markdown(
         .stButton>button:hover {
             background-color: #1a252f;
         }
+
+        /* Input and select box styling */
         .stNumberInput, .stSelectbox {
             margin-bottom: 10px;
         }
+        input {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 8px;
+            font-size: 14px;
+        }
+        select {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 8px;
+            font-size: 14px;
+        }
+
+        /* Footer styling */
         .footer {
             font-size: 14px;
             text-align: center;
             margin-top: 20px;
             color: #95a5a6;
-        }
-        .stTextInput, .stNumberInput, .stSelectbox {
-            font-size: 14px;
         }
     </style>
     """,
@@ -77,10 +95,10 @@ try:
     st.header("Enter Patient Details")
     age = st.number_input("Age", min_value=20, max_value=100, value=50)
     sex = st.selectbox("Sex", ["Male", "Female"])
-    diabetes = st.selectbox("Diabetes", [0, 1])
-    cardiovascular = st.selectbox("Cardiovascular Disease", [0, 1])
-    smoking = st.selectbox("Smoking", [0, 1])
-    immunosuppression = st.selectbox("Immunosuppression", [0, 1])
+    diabetes = st.selectbox("Diabetes", [0, 1], format_func=lambda x: "Yes" if x == 1 else "No")
+    cardiovascular = st.selectbox("Cardiovascular Disease", [0, 1], format_func=lambda x: "Yes" if x == 1 else "No")
+    smoking = st.selectbox("Smoking", [0, 1], format_func=lambda x: "Yes" if x == 1 else "No")
+    immunosuppression = st.selectbox("Immunosuppression", [0, 1], format_func=lambda x: "Yes" if x == 1 else "No")
     albumin = st.number_input("Albumin Level (g/dL)", min_value=1.0, max_value=5.0, value=3.5)
     prealbumin = st.number_input("Prealbumin Level (mg/dL)", min_value=5.0, max_value=50.0, value=20.0)
 
