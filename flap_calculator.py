@@ -39,7 +39,7 @@ st.markdown(
         font-weight: bold;
     }
     .subheader {
-        color: #ffffff; /* White color for the subheader */
+        color: #000000; /* Black color for the subheader */
         font-size: 18px;
         text-align: center;
         margin-bottom: 20px;
