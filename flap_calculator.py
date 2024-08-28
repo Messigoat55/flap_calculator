@@ -2,13 +2,38 @@ import streamlit as st
 import joblib
 import numpy as np
 
-st.write("App is running!")  # Confirm the app is starting
+# Set the page configuration with a centered layout and an icon
+st.set_page_config(page_title="Leg Flap Risk Calculator", layout="centered", page_icon="🦵")
+
+# Custom CSS for the design
+st.markdown(
+    """
+    <style>
+        .header {
+            color: #2c3e50;
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        .subheader {
+            color: #34495e;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# Display headers with the university name and calculator title
+st.markdown('<div class="header">X University</div>', unsafe_allow_html=True)
+st.markdown('<div class="subheader">Leg Flap Risk Calculator</div>', unsafe_allow_html=True)
 
 try:
-    # Load the trained model
-    st.write("Loading the model...")
+    # Load the trained model without unnecessary indicators
     model = joblib.load('final_xgboost_model.pkl')
-    st.write("Model loaded successfully.")
     
     # Input fields for patient characteristics
     age = st.number_input("Age", min_value=20, max_value=100, value=50)
@@ -20,19 +45,14 @@ try:
     albumin = st.number_input("Albumin Level (g/dL)", min_value=1.0, max_value=5.0, value=3.5)
     prealbumin = st.number_input("Prealbumin Level (mg/dL)", min_value=5.0, max_value=50.0, value=20.0)
 
-    st.write("Inputs received.")
-
     # Encode sex as numeric
     sex_encoded = 1 if sex == "Male" else 0
 
     # Create input array
     input_data = np.array([[age, sex_encoded, diabetes, cardiovascular, smoking, immunosuppression, albumin, prealbumin]])
 
-    st.write("Input data prepared.")
-
     # Predict probabilities of outcomes
     if st.button("Predict Outcomes"):
-        st.write("Predicting outcomes...")
         probabilities = model.predict_proba(input_data)
 
         outcomes = ["Infection", "Necrosis", "Congestion", "Seroma", "Hematoma", "Dehiscence", "Hospital Readmission"]
@@ -41,5 +61,6 @@ try:
         st.subheader("Predicted Complication Probabilities:")
         for i, outcome in enumerate(outcomes):
             st.write(f"{outcome}: {probabilities[i][0][1] * 100:.2f}% chance")
+
 except Exception as e:
-    st.write(f"An error occurred: {e}")
+    st.error(f"An error occurred: {e}")
