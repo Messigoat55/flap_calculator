@@ -72,35 +72,35 @@ try:
     # Create a styled input container with labels and inputs touching each other
     with st.form(key='input_form'):
         st.markdown('<div class="input-box"><label>Age</label>', unsafe_allow_html=True)
-        age = st.number_input("", min_value=20, max_value=100, value=50, label_visibility="collapsed")
+        age = st.number_input("", min_value=20, max_value=100, value=50, label_visibility="collapsed", key="age")
         st.markdown('</div>', unsafe_allow_html=True)
 
         st.markdown('<div class="input-box"><label>Sex</label>', unsafe_allow_html=True)
-        sex = st.selectbox("", ["Male", "Female"], label_visibility="collapsed")
+        sex = st.selectbox("", ["Male", "Female"], label_visibility="collapsed", key="sex")
         st.markdown('</div>', unsafe_allow_html=True)
 
         st.markdown('<div class="input-box"><label>Diabetes</label>', unsafe_allow_html=True)
-        diabetes = st.selectbox("", [0, 1], label_visibility="collapsed")
+        diabetes = st.selectbox("", [0, 1], label_visibility="collapsed", key="diabetes")
         st.markdown('</div>', unsafe_allow_html=True)
 
         st.markdown('<div class="input-box"><label>Cardiovascular Disease</label>', unsafe_allow_html=True)
-        cardiovascular = st.selectbox("", [0, 1], label_visibility="collapsed")
+        cardiovascular = st.selectbox("", [0, 1], label_visibility="collapsed", key="cardiovascular")
         st.markdown('</div>', unsafe_allow_html=True)
 
         st.markdown('<div class="input-box"><label>Smoking</label>', unsafe_allow_html=True)
-        smoking = st.selectbox("", [0, 1], label_visibility="collapsed")
+        smoking = st.selectbox("", [0, 1], label_visibility="collapsed", key="smoking")
         st.markdown('</div>', unsafe_allow_html=True)
 
         st.markdown('<div class="input-box"><label>Immunosuppression</label>', unsafe_allow_html=True)
-        immunosuppression = st.selectbox("", [0, 1], label_visibility="collapsed")
+        immunosuppression = st.selectbox("", [0, 1], label_visibility="collapsed", key="immunosuppression")
         st.markdown('</div>', unsafe_allow_html=True)
 
         st.markdown('<div class="input-box"><label>Albumin Level (g/dL)</label>', unsafe_allow_html=True)
-        albumin = st.number_input("", min_value=1.0, max_value=5.0, value=3.5, label_visibility="collapsed")
+        albumin = st.number_input("", min_value=1.0, max_value=5.0, value=3.5, label_visibility="collapsed", key="albumin")
         st.markdown('</div>', unsafe_allow_html=True)
 
         st.markdown('<div class="input-box"><label>Prealbumin Level (mg/dL)</label>', unsafe_allow_html=True)
-        prealbumin = st.number_input("", min_value=5.0, max_value=50.0, value=20.0, label_visibility="collapsed")
+        prealbumin = st.number_input("", min_value=5.0, max_value=50.0, value=20.0, label_visibility="collapsed", key="prealbumin")
         st.markdown('</div>', unsafe_allow_html=True)
 
         # Submit button for the form
