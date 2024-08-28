@@ -2,8 +2,17 @@ import streamlit as st
 import joblib
 import numpy as np
 
-# Set the page configuration with a centered layout and an icon
-st.set_page_config(page_title="Leg Flap Risk Calculator", layout="centered", page_icon="🦵")
+# Set the page configuration with a centered layout, icon, and customized menu items
+st.set_page_config(
+    page_title="Leg Flap Risk Calculator", 
+    layout="wide",  # Sets layout to wide
+    page_icon="🦵",
+    menu_items={
+        "Get Help": "https://www.streamlit.io",  # Customize the "Get Help" link
+        "Report a Bug": "https://github.com/streamlit/streamlit/issues",
+        "About": "This is a demo app for Streamlit."
+    }
+)
 
 # Add custom CSS to hide GitHub badge and other related elements
 st.markdown(
@@ -57,10 +66,6 @@ try:
         st.subheader("Predicted Complication Probabilities:")
         for i, outcome in enumerate(outcomes):
             st.write(f"{outcome}: {probabilities[i][0][1] * 100:.2f}% chance")
-
-except Exception as e:
-    st.error(f"An error occurred: {e}")
-
 
 except Exception as e:
     st.error(f"An error occurred: {e}")
