@@ -10,7 +10,7 @@ st.markdown(
     """
     <style>
         .header {
-            color: #2c3e50;
+            color: #800000; /* Maroon color for the header */
             font-size: 36px;
             font-weight: bold;
             text-align: center;
