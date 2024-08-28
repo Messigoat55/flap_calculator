@@ -5,7 +5,7 @@ import numpy as np
 # Set the page configuration with a centered layout and an icon
 st.set_page_config(page_title="Leg Flap Risk Calculator", layout="centered", page_icon="🦵")
 
-# Custom CSS for the design
+# Custom CSS for the design and to hide the GitHub badge
 st.markdown(
     """
     <style>
@@ -22,6 +22,9 @@ st.markdown(
             text-align: center;
             margin-bottom: 20px;
             font-style: italic;
+        }
+        #GithubIcon { 
+            visibility: hidden; /* Hides the GitHub badge */
         }
     </style>
     """,
@@ -65,3 +68,4 @@ try:
 
 except Exception as e:
     st.error(f"An error occurred: {e}")
+
