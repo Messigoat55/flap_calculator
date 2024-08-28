@@ -10,31 +10,38 @@ st.markdown(
     """
     <style>
         .main {
-            background-color: #f5f5f5;
+            background-color: #f0f4f8;
             padding: 20px;
             border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .header {
-            color: #800000;
+            color: #2c3e50;
             font-size: 36px;
             font-weight: bold;
             text-align: center;
             margin-bottom: 5px;
         }
         .subheader {
-            color: #800000;
-            font-size: 28px;
+            color: #34495e;
+            font-size: 24px;
             text-align: center;
             margin-bottom: 20px;
         }
         .stButton>button {
-            background-color: #800000;
+            background-color: #2c3e50;
             color: white;
-            border-radius: 8px;
-            height: 50px;
-            width: 200px;
-            margin: 10px auto;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            margin: 20px auto;
             display: block;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .stButton>button:hover {
+            background-color: #1a252f;
         }
         .stNumberInput, .stSelectbox {
             margin-bottom: 10px;
@@ -43,7 +50,10 @@ st.markdown(
             font-size: 14px;
             text-align: center;
             margin-top: 20px;
-            color: #808080;
+            color: #95a5a6;
+        }
+        .stTextInput, .stNumberInput, .stSelectbox {
+            font-size: 14px;
         }
     </style>
     """,
@@ -59,9 +69,9 @@ st.markdown('<div class="main">', unsafe_allow_html=True)
 
 try:
     # Load the trained model
-    st.write("Loading the model...")
+    st.info("Loading the model...")
     model = joblib.load('final_xgboost_model.pkl')
-    st.write("Model loaded successfully.")
+    st.success("Model loaded successfully.")
     
     # Input fields for patient characteristics
     st.header("Enter Patient Details")
