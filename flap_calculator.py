@@ -2,11 +2,11 @@ import streamlit as st
 import joblib
 import numpy as np
 
-# Set the page configuration with a centered layout, icon, and customized menu items
+# Set the page configuration with a wide layout, custom title, and custom icon
 st.set_page_config(
     page_title="Leg Flap Risk Calculator", 
     layout="wide",  # Sets layout to wide
-    page_icon="🦵",
+    page_icon="your_favicon.ico",  # Custom icon file
     menu_items={
         "Get Help": "https://www.streamlit.io",  # Customize the "Get Help" link
         "Report a Bug": "https://github.com/streamlit/streamlit/issues",
@@ -14,23 +14,9 @@ st.set_page_config(
     }
 )
 
-# Add custom CSS to hide GitHub badge and other related elements
-st.markdown(
-    """
-    <style>
-    /* Attempt to hide GitHub badge by targeting broader and other specific elements */
-    [data-testid="stDecoration"], 
-    .css-1v3fvcr, 
-    .css-1j6bx3l, 
-    .viewerBadge_container__1QSob,
-    .stViewerBadge {
-        display: none !important;
-        visibility: hidden;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+# Load custom CSS from a file to hide GitHub badge and other elements
+with open("styles.css") as f:
+    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 # Display the calculator title and subtitle
 st.markdown('<div class="header">Leg Flap Risk Calculator</div>', unsafe_allow_html=True)
