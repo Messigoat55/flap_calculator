@@ -1,0 +1,6 @@
+.st-menu-button { 
+  display: none; /* Hides the main menu button */
+}
+.viewerBadge_container__1QSob, .stViewerBadge {
+  display: none !important; /* Hides the GitHub badge */
+}
