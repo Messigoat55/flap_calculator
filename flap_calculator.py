@@ -5,52 +5,67 @@ import numpy as np
 # Set the page configuration with a centered layout and an icon
 st.set_page_config(page_title="Leg Flap Risk Calculator", layout="centered", page_icon="🦵")
 
-# Custom CSS for enhanced styling
+# Custom CSS for an elegant and readable design
 st.markdown(
     """
     <style>
+        /* Main container styling */
         .main {
-            background-color: #f0f4f8;
-            padding: 20px;
+            background-color: #ffffff;
+            padding: 25px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
+        /* Header and subheader styling */
         .header {
-            color: #2c3e50;
+            color: #2B2D42;
             font-size: 36px;
             font-weight: bold;
             text-align: center;
             margin-bottom: 5px;
         }
         .subheader {
-            color: #34495e;
+            color: #8D99AE;
             font-size: 24px;
             text-align: center;
             margin-bottom: 20px;
         }
+
+        /* Button styling */
         .stButton>button {
-            background-color: #2c3e50;
+            background-color: #EF233C;
             color: white;
             border: none;
             padding: 12px 24px;
-            border-radius: 5px;
-            margin: 20px auto;
-            display: block;
+            border-radius: 8px;
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s;
         }
         .stButton>button:hover {
-            background-color: #1a252f;
+            background-color: #D90429;
         }
+
+        /* Input fields styling */
         .stNumberInput, .stSelectbox {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
+        input, select {
+            color: #2B2D42;
+            border-radius: 5px;
+            border: 1px solid #E0E0E0;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        /* Footer styling */
         .footer {
             font-size: 14px;
             text-align: center;
             margin-top: 20px;
-            color: #95a5a6;
+            color: #8D99AE;
         }
     </style>
     """,
@@ -65,13 +80,11 @@ st.markdown('<div class="subheader">Leg Flap Risk Calculator</div>', unsafe_allo
 st.markdown('<div class="main">', unsafe_allow_html=True)
 
 try:
-    # Load the trained model
-    st.info("Loading the model...")
+    # Load the trained model without displaying loading messages
     model = joblib.load('final_xgboost_model.pkl')
-    st.success("Model loaded successfully.")
     
     # Input fields for patient characteristics
-    st.header("Enter Patient Details")
+    st.subheader("Enter Patient Details")
     age = st.number_input("Age", min_value=20, max_value=100, value=50)
     sex = st.selectbox("Sex", ["Male", "Female"])
     diabetes = st.selectbox("Diabetes", [0, 1], format_func=lambda x: "Yes" if x == 1 else "No")
@@ -89,7 +102,6 @@ try:
 
     # Predict probabilities of outcomes
     if st.button("Predict Outcomes"):
-        st.write("Predicting outcomes...")
         probabilities = model.predict_proba(input_data)
 
         outcomes = ["Infection", "Necrosis", "Congestion", "Seroma", "Hematoma", "Dehiscence", "Hospital Readmission"]
