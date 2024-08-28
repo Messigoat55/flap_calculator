@@ -9,20 +9,28 @@ st.set_page_config(page_title="Leg Flap Risk Calculator", layout="centered", pag
 st.markdown(
     """
     <style>
+        .header {
+            color: #b22222; /* Brighter maroon color for the header */
+            font-size: 30px;
+            text-align: center;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
         .subheader {
-            color: #800000; /* Maroon color for the subheader */
-            font-size: 24px;
+            color: #ffffff; /* White color for the subheader */
+            font-size: 18px;
             text-align: center;
             margin-bottom: 20px;
-            font-weight: bold;
+            font-style: italic;
         }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Display the calculator title
-st.markdown('<div class="subheader">Leg Flap Risk Calculator</div>', unsafe_allow_html=True)
+# Display the calculator title and subtitle
+st.markdown('<div class="header">Leg Flap Risk Calculator</div>', unsafe_allow_html=True)
+st.markdown('<div class="subheader">(Powered by Machine Learning)</div>', unsafe_allow_html=True)
 
 try:
     # Load the trained model without unnecessary indicators
