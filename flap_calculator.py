@@ -4,19 +4,36 @@ import numpy as np
 
 # Set the page configuration with a wide layout, custom title, and custom icon
 st.set_page_config(
-    page_title="Leg Flap Risk Calculator", 
+    page_title="Leg Flap Risk Calculator",
     layout="wide",  # Sets layout to wide
     page_icon="your_favicon.ico",  # Custom icon file
     menu_items={
-        "Get Help": "https://www.streamlit.io",  # Customize the "Get Help" link
+        "Get Help": "https://www.streamlit.io",
         "Report a Bug": "https://github.com/streamlit/streamlit/issues",
         "About": "This is a demo app for Streamlit."
     }
 )
 
-# Load custom CSS from a file to hide GitHub badge and other elements
-with open("styles.css") as f:
-    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+# Add custom CSS to hide all unwanted elements including the GitHub badge and main menu
+st.markdown(
+    """
+    <style>
+    /* Hide the main menu and footer */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    /* Hide GitHub badges and other dynamic elements */
+    .css-1v3fvcr, 
+    .css-1j6bx3l, 
+    .viewerBadge_container__1QSob,
+    .stViewerBadge,
+    .stApp > header {
+        display: none !important; 
+        visibility: hidden !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # Display the calculator title and subtitle
 st.markdown('<div class="header">Leg Flap Risk Calculator</div>', unsafe_allow_html=True)
@@ -25,7 +42,7 @@ st.markdown('<div class="subheader">(Powered by Machine Learning)</div>', unsafe
 try:
     # Load the trained model without unnecessary indicators
     model = joblib.load('final_xgboost_model.pkl')
-    
+
     # Input fields for patient characteristics
     age = st.number_input("Age", min_value=20, max_value=100, value=50)
     sex = st.selectbox("Sex", ["Male", "Female"])
