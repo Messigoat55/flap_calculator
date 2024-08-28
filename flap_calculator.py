@@ -2,7 +2,38 @@ import streamlit as st
 import joblib
 import numpy as np
 
-st.write("App is running!")  # Confirm the app is starting
+# Set the page configuration
+st.set_page_config(page_title="Leg Flap Risk Calculator", layout="centered")
+
+# Set background color and styling
+st.markdown(
+    """
+    <style>
+        .main {
+            background-color: white;
+        }
+        .header {
+            color: maroon;
+            font-size: 32px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .subheader {
+            color: maroon;
+            font-size: 24px;
+            text-align: center;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# Display headers with the university name and calculator title
+st.markdown('<div class="header">X University</div>', unsafe_allow_html=True)
+st.markdown('<div class="subheader">Leg Flap Risk Calculator</div>', unsafe_allow_html=True)
+
+# Divider line for visual separation
+st.markdown("---")
 
 try:
     # Load the trained model
@@ -20,15 +51,11 @@ try:
     albumin = st.number_input("Albumin Level (g/dL)", min_value=1.0, max_value=5.0, value=3.5)
     prealbumin = st.number_input("Prealbumin Level (mg/dL)", min_value=5.0, max_value=50.0, value=20.0)
 
-    st.write("Inputs received.")
-
     # Encode sex as numeric
     sex_encoded = 1 if sex == "Male" else 0
 
     # Create input array
     input_data = np.array([[age, sex_encoded, diabetes, cardiovascular, smoking, immunosuppression, albumin, prealbumin]])
-
-    st.write("Input data prepared.")
 
     # Predict probabilities of outcomes
     if st.button("Predict Outcomes"):
