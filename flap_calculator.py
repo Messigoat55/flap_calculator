@@ -9,26 +9,19 @@ st.set_page_config(page_title="Leg Flap Risk Calculator", layout="centered", pag
 st.markdown(
     """
     <style>
-        .header {
-            color: #800000; /* Maroon color for the header */
-            font-size: 36px;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 5px;
-        }
         .subheader {
-            color: #34495e;
+            color: #800000; /* Maroon color for the subheader */
             font-size: 24px;
             text-align: center;
             margin-bottom: 20px;
+            font-weight: bold;
         }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Display headers with the university name and calculator title
-st.markdown('<div class="header">X University</div>', unsafe_allow_html=True)
+# Display the calculator title
 st.markdown('<div class="subheader">Leg Flap Risk Calculator</div>', unsafe_allow_html=True)
 
 try:
