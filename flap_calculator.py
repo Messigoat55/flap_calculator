@@ -65,3 +65,6 @@ try:
 
 except Exception as e:
     st.error(f"An error occurred: {e}")
+    #GithubIcon {
+  visibility: hidden;
+}
