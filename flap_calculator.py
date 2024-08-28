@@ -2,26 +2,48 @@ import streamlit as st
 import joblib
 import numpy as np
 
-# Set the page configuration
-st.set_page_config(page_title="Leg Flap Risk Calculator", layout="centered")
+# Set the page configuration with a centered layout and an icon
+st.set_page_config(page_title="Leg Flap Risk Calculator", layout="centered", page_icon="🦵")
 
-# Set background color and styling
+# Custom CSS for enhanced styling
 st.markdown(
     """
     <style>
         .main {
-            background-color: white;
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
         }
         .header {
-            color: maroon;
-            font-size: 32px;
+            color: #800000;
+            font-size: 36px;
             font-weight: bold;
             text-align: center;
+            margin-bottom: 5px;
         }
         .subheader {
-            color: maroon;
-            font-size: 24px;
+            color: #800000;
+            font-size: 28px;
             text-align: center;
+            margin-bottom: 20px;
+        }
+        .stButton>button {
+            background-color: #800000;
+            color: white;
+            border-radius: 8px;
+            height: 50px;
+            width: 200px;
+            margin: 10px auto;
+            display: block;
+        }
+        .stNumberInput, .stSelectbox {
+            margin-bottom: 10px;
+        }
+        .footer {
+            font-size: 14px;
+            text-align: center;
+            margin-top: 20px;
+            color: #808080;
         }
     </style>
     """,
@@ -32,8 +54,8 @@ st.markdown(
 st.markdown('<div class="header">X University</div>', unsafe_allow_html=True)
 st.markdown('<div class="subheader">Leg Flap Risk Calculator</div>', unsafe_allow_html=True)
 
-# Divider line for visual separation
-st.markdown("---")
+# Main app container
+st.markdown('<div class="main">', unsafe_allow_html=True)
 
 try:
     # Load the trained model
@@ -42,6 +64,7 @@ try:
     st.write("Model loaded successfully.")
     
     # Input fields for patient characteristics
+    st.header("Enter Patient Details")
     age = st.number_input("Age", min_value=20, max_value=100, value=50)
     sex = st.selectbox("Sex", ["Male", "Female"])
     diabetes = st.selectbox("Diabetes", [0, 1])
@@ -67,6 +90,7 @@ try:
         # Display predicted probabilities
         st.subheader("Predicted Complication Probabilities:")
         for i, outcome in enumerate(outcomes):
-            st.write(f"{outcome}: {probabilities[i][0][1] * 100:.2f}% chance")
+            st.write(f"**{outcome}**: {probabilities[i][0][1] * 100:.2f}% chance")
+
 except Exception as e:
-    st.write(f"An error occurred: {e}")
+    st.error(f"An 
