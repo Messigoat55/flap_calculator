@@ -5,19 +5,24 @@ import numpy as np
 # Set the page configuration with a centered layout and an icon
 st.set_page_config(page_title="Leg Flap Risk Calculator", layout="centered", page_icon="🦵")
 
-# Custom CSS to hide GitHub badge and other unwanted elements
-st.markdown(
-    """
+# Add custom CSS to hide GitHub badge and other elements
+hide_elements = """
     <style>
+    /* Hide GitHub badge and other related elements */
     .css-1jc7ptx, .e1ewe7hr3, .viewerBadge_container__1QSob,
     .styles_viewerBadge__1yB5_, .viewerBadge_link__1S137,
     .viewerBadge_text__1JaDK {
-        display: none; /* Hides GitHub badge and related elements */
+        display: none;
+    }
+    #MainMenu { 
+        visibility: hidden; /* Hide the main menu */
+    }
+    footer { 
+        visibility: hidden; /* Hide the footer, which might include badges */
     }
     </style>
-    """,
-    unsafe_allow_html=True
-)
+"""
+st.markdown(hide_elements, unsafe_allow_html=True)
 
 # Display the calculator title and subtitle
 st.markdown('<div class="header">Leg Flap Risk Calculator</div>', unsafe_allow_html=True)
