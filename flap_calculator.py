@@ -2,9 +2,6 @@ import streamlit as st
 import joblib
 import numpy as np
 
-# Install xgboost if not already installed
-subprocess.run(['pip', 'install', 'xgboost'])
-
 # Set the page configuration with a centered layout and an icon
 st.set_page_config(page_title="Leg Flap Risk Calculator", layout="centered", page_icon="🦵")
 
