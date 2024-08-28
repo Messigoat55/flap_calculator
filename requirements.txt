@@ -2,3 +2,5 @@ streamlit
 numpy
 joblib
 scikit-learn
+# Install xgboost if not already installed
+subprocess.run(['pip', 'install', 'xgboost'])
