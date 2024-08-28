@@ -5,30 +5,15 @@ import numpy as np
 # Set the page configuration with a centered layout and an icon
 st.set_page_config(page_title="Leg Flap Risk Calculator", layout="centered", page_icon="🦵")
 
-# Custom CSS for the design and to hide the GitHub badge and Main Menu
+# Custom CSS to hide GitHub badge and other unwanted elements
 st.markdown(
     """
     <style>
-        .header {
-            color: #b22222; /* Brighter maroon color for the header */
-            font-size: 30px;
-            text-align: center;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        .subheader {
-            color: #ffffff; /* White color for the subheader */
-            font-size: 18px;
-            text-align: center;
-            margin-bottom: 20px;
-            font-style: italic;
-        }
-        #GithubIcon { 
-            visibility: hidden; /* Hides the GitHub badge */
-        }
-        #MainMenu {
-            visibility: hidden; /* Hides the Main Menu */
-        }
+    .css-1jc7ptx, .e1ewe7hr3, .viewerBadge_container__1QSob,
+    .styles_viewerBadge__1yB5_, .viewerBadge_link__1S137,
+    .viewerBadge_text__1JaDK {
+        display: none; /* Hides GitHub badge and related elements */
+    }
     </style>
     """,
     unsafe_allow_html=True
