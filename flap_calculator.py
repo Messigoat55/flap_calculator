@@ -11,7 +11,7 @@ st.markdown(
     <style>
         /* Main container styling */
         .main {
-            background-color: #ffffff;
+            background-color: #f7f7f7; /* Light gray background */
             padding: 25px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -27,7 +27,7 @@ st.markdown(
             margin-bottom: 5px;
         }
         .subheader {
-            color: #8D99AE;
+            color: #4F5D75;
             font-size: 24px;
             text-align: center;
             margin-bottom: 20px;
@@ -35,7 +35,7 @@ st.markdown(
 
         /* Button styling */
         .stButton>button {
-            background-color: #EF233C;
+            background-color: #2B2D42;
             color: white;
             border: none;
             padding: 12px 24px;
@@ -45,17 +45,19 @@ st.markdown(
             transition: background-color 0.3s;
         }
         .stButton>button:hover {
-            background-color: #D90429;
+            background-color: #1F2833;
         }
 
         /* Input fields styling */
         .stNumberInput, .stSelectbox {
             margin-bottom: 15px;
+            color: #2B2D42;
         }
         input, select {
-            color: #2B2D42;
+            color: #2B2D42; /* Readable color for inputs */
+            background-color: #ffffff;
             border-radius: 5px;
-            border: 1px solid #E0E0E0;
+            border: 1px solid #CCCCCC;
             padding: 10px;
             font-size: 14px;
         }
@@ -65,7 +67,7 @@ st.markdown(
             font-size: 14px;
             text-align: center;
             margin-top: 20px;
-            color: #8D99AE;
+            color: #6c757d;
         }
     </style>
     """,
