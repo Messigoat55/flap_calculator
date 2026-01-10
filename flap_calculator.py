@@ -17,22 +17,26 @@ st.set_page_config(
 st.markdown(
     """
     <style>
+    /* Base app */
     .stApp {
         background: #fbfbfc;
         color: #111827;
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
     }
 
+    /* Hide Streamlit chrome */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
 
+    /* Main container */
     .block-container {
         max-width: 980px;
         padding-top: 2rem;
-        padding-bottom: 2rem;
+        padding-bottom: 5rem;   /* ✅ bottom padding so results don't hit edge */
     }
 
+    /* Header card */
     .hero {
         background: #ffffff;
         border-radius: 18px;
@@ -64,6 +68,7 @@ st.markdown(
         color: #64748b;
     }
 
+    /* Form card */
     .card {
         background: #ffffff;
         border-radius: 18px;
@@ -71,17 +76,21 @@ st.markdown(
         box-shadow: 0 8px 20px rgba(0,0,0,0.06);
     }
 
+    /* Field labels */
     .field-label {
         font-weight: 700;
         margin: 10px 0 4px 0;
+        color: #111827;
     }
 
+    /* Tighten spacing between labels and inputs */
     div[data-testid="stSelectbox"],
     div[data-testid="stNumberInput"] {
         margin-top: -6px;
         margin-bottom: 14px;
     }
 
+    /* Submit button */
     .stFormSubmitButton button {
         width: 100%;
         background: #8C1515;
@@ -90,12 +99,13 @@ st.markdown(
         font-weight: 800;
         padding: 0.75rem;
         border: none;
-        margin-top: 10px;
+        margin-top: 12px;
     }
 
+    /* Results */
     .results-title {
         margin-top: 22px;
-        margin-bottom: 10px;
+        margin-bottom: 14px;
         font-family: Georgia, Cambria, "Times New Roman", Times, serif;
         font-size: 20px;
     }
@@ -146,7 +156,7 @@ try:
 
     with st.form("input_form"):
 
-        # CARD STARTS INSIDE FORM (this fixes the empty cell)
+        # Card INSIDE form (prevents empty space above Age)
         st.markdown('<div class="card">', unsafe_allow_html=True)
 
         st.markdown('<div class="field-label">Age</div>', unsafe_allow_html=True)
@@ -176,7 +186,6 @@ try:
         submit = st.form_submit_button("Predict Outcomes")
 
         st.markdown("</div>", unsafe_allow_html=True)
-        # CARD ENDS
 
     if submit:
         input_data = np.array([[
@@ -202,7 +211,10 @@ try:
             "Hospital Readmission"
         ]
 
-        st.markdown('<div class="results-title">Predicted complication probabilities</div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="results-title">Predicted complication probabilities</div>',
+            unsafe_allow_html=True
+        )
 
         for i, outcome in enumerate(outcomes):
             pct = probabilities[i][0][1] * 100
