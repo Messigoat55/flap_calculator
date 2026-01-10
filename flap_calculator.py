@@ -12,7 +12,7 @@ st.set_page_config(
 )
 
 # -----------------------------
-# Styling (CSS ONLY, no HTML structure)
+# Styling
 # -----------------------------
 st.markdown(
     """
@@ -33,7 +33,6 @@ st.markdown(
         padding-bottom: 5rem;
     }
 
-    /* Header styling */
     .title-text {
         font-family: Georgia, Cambria, "Times New Roman", Times, serif;
         font-size: 34px;
@@ -55,10 +54,15 @@ st.markdown(
     .disclaimer {
         font-size: 12px;
         color: #64748b;
+        margin-bottom: 4px;
+    }
+
+    .byline {
+        font-size: 12px;
+        color: #64748b;
         margin-bottom: 18px;
     }
 
-    /* Form card */
     div[data-testid="stForm"] {
         background: #ffffff;
         border-radius: 18px;
@@ -114,10 +118,8 @@ st.markdown(
 )
 
 # -----------------------------
-# Header (NO HTML BLOCKS)
+# Header
 # -----------------------------
-st.caption("Created by **Louis Massoud, MD**")
-
 st.markdown(
     '### <span class="title-text">Tibial Limb Salvage <span class="accent">Free Flap</span> Risk Calculator</span>',
     unsafe_allow_html=True
@@ -130,6 +132,11 @@ st.markdown(
 
 st.markdown(
     '<div class="disclaimer">For research and demonstration only. Not for clinical decision-making.</div>',
+    unsafe_allow_html=True
+)
+
+st.markdown(
+    '<div class="byline">Created by <strong>Louis Massoud, MD</strong></div>',
     unsafe_allow_html=True
 )
 
