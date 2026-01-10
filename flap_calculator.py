@@ -12,12 +12,12 @@ st.set_page_config(
 )
 
 # -----------------------------
-# Styling (clean + uniform spacing)
+# Styling (FINAL, CLEAN)
 # -----------------------------
 st.markdown(
     """
     <style>
-    /* App base */
+    /* Base */
     .stApp {
         background: #fbfbfc;
         color: #111827;
@@ -44,21 +44,24 @@ st.markdown(
         box-shadow: 0 8px 20px rgba(0,0,0,0.06);
         margin-bottom: 20px;
     }
+
     .hero-title {
         font-family: Georgia, Cambria, "Times New Roman", Times, serif;
         font-size: 34px;
         line-height: 1.15;
-        margin: 0;
     }
+
     .hero-accent {
         color: #8C1515;
         font-weight: 800;
     }
+
     .hero-sub {
         margin-top: 8px;
         color: #475569;
         font-size: 15px;
     }
+
     .disclaimer {
         margin-top: 10px;
         font-size: 12px;
@@ -73,21 +76,26 @@ st.markdown(
         box-shadow: 0 8px 20px rgba(0,0,0,0.06);
     }
 
-    /* Uniform field spacing */
-    .field-label {
-        font-weight: 700;
-        margin: 10px 0 4px 0;   /* label sits close to its input */
-        color: #111827;
-    }
-    .field-first {
-        margin-top: 0;          /* first label doesn't add extra top space */
+    /* 🔥 REMOVE EMPTY SPACE ABOVE FIRST FIELD */
+    div[data-testid="stForm"] {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
     }
 
-    /* Pull widgets closer to labels + uniform spacing between fields */
+    /* Uniform label spacing */
+    .field-label {
+        font-weight: 700;
+        margin: 10px 0 4px 0;
+    }
+    .field-first {
+        margin-top: 0;
+    }
+
+    /* Pull inputs closer to labels */
     div[data-testid="stSelectbox"],
     div[data-testid="stNumberInput"] {
-        margin-top: -6px;       /* reduce gap between label and input */
-        margin-bottom: 14px;    /* uniform gap between fields */
+        margin-top: -6px;
+        margin-bottom: 14px;
     }
 
     /* Button */
@@ -108,8 +116,8 @@ st.markdown(
         margin-bottom: 10px;
         font-family: Georgia, Cambria, "Times New Roman", Times, serif;
         font-size: 20px;
-        color: #111827;
     }
+
     .result-row {
         display: flex;
         justify-content: space-between;
@@ -119,18 +127,14 @@ st.markdown(
         background: #ffffff;
         margin-bottom: 8px;
     }
-    .result-name { font-weight: 800; }
+
+    .result-name {
+        font-weight: 800;
+    }
     </style>
     """,
     unsafe_allow_html=True
 )
-
-/* Remove empty space at top of form */
-div[data-testid="stForm"] {
-    padding-top: 0 !important;
-    margin-top: 0 !important;
-}
-
 
 # -----------------------------
 # Header
@@ -158,7 +162,6 @@ st.markdown(
 try:
     model = joblib.load("final_xgboost_model.pkl")
 
-    # IMPORTANT: only ONE card wrapper (prevents the blank empty card)
     st.markdown('<div class="card">', unsafe_allow_html=True)
 
     with st.form("input_form"):
