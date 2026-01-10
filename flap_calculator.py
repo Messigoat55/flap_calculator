@@ -75,7 +75,7 @@ st.markdown(
         color: #64748b;
     }
 
-    /* REAL form card (Streamlit form container) */
+    /* Style the REAL Streamlit form as the card */
     div[data-testid="stForm"] {
         background: #ffffff;
         border-radius: 18px;
@@ -94,7 +94,7 @@ st.markdown(
         margin-top: 0;
     }
 
-    /* Tight label-input spacing */
+    /* Tighten spacing between labels and inputs */
     div[data-testid="stSelectbox"],
     div[data-testid="stNumberInput"] {
         margin-top: -6px;
@@ -173,6 +173,7 @@ try:
     model = joblib.load("final_xgboost_model.pkl")
 
     with st.form("input_form"):
+
         st.markdown('<div class="field-label field-first">Age</div>', unsafe_allow_html=True)
         age = st.number_input("", 20, 100, 50, key="age")
 
