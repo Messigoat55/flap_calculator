@@ -125,6 +125,13 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+/* Remove empty space at top of form */
+div[data-testid="stForm"] {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+
 # -----------------------------
 # Header
 # -----------------------------
