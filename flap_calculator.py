@@ -12,31 +12,27 @@ st.set_page_config(
 )
 
 # -----------------------------
-# Styling (FINAL, CLEAN)
+# Styling
 # -----------------------------
 st.markdown(
     """
     <style>
-    /* Base */
     .stApp {
         background: #fbfbfc;
         color: #111827;
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
     }
 
-    /* Hide Streamlit chrome */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
 
-    /* Layout */
     .block-container {
         max-width: 980px;
         padding-top: 2rem;
         padding-bottom: 2rem;
     }
 
-    /* Header card */
     .hero {
         background: #ffffff;
         border-radius: 18px;
@@ -68,7 +64,6 @@ st.markdown(
         color: #64748b;
     }
 
-    /* Form card */
     .card {
         background: #ffffff;
         border-radius: 18px;
@@ -76,29 +71,17 @@ st.markdown(
         box-shadow: 0 8px 20px rgba(0,0,0,0.06);
     }
 
-    /* 🔥 REMOVE EMPTY SPACE ABOVE FIRST FIELD */
-    div[data-testid="stForm"] {
-        padding-top: 0 !important;
-        margin-top: 0 !important;
-    }
-
-    /* Uniform label spacing */
     .field-label {
         font-weight: 700;
         margin: 10px 0 4px 0;
     }
-    .field-first {
-        margin-top: 0;
-    }
 
-    /* Pull inputs closer to labels */
     div[data-testid="stSelectbox"],
     div[data-testid="stNumberInput"] {
         margin-top: -6px;
         margin-bottom: 14px;
     }
 
-    /* Button */
     .stFormSubmitButton button {
         width: 100%;
         background: #8C1515;
@@ -107,10 +90,9 @@ st.markdown(
         font-weight: 800;
         padding: 0.75rem;
         border: none;
-        margin-top: 6px;
+        margin-top: 10px;
     }
 
-    /* Results */
     .results-title {
         margin-top: 22px;
         margin-bottom: 10px;
@@ -162,11 +144,12 @@ st.markdown(
 try:
     model = joblib.load("final_xgboost_model.pkl")
 
-    st.markdown('<div class="card">', unsafe_allow_html=True)
-
     with st.form("input_form"):
 
-        st.markdown('<div class="field-label field-first">Age</div>', unsafe_allow_html=True)
+        # CARD STARTS INSIDE FORM (this fixes the empty cell)
+        st.markdown('<div class="card">', unsafe_allow_html=True)
+
+        st.markdown('<div class="field-label">Age</div>', unsafe_allow_html=True)
         age = st.number_input("", 20, 100, 50, key="age")
 
         st.markdown('<div class="field-label">Sex</div>', unsafe_allow_html=True)
@@ -192,7 +175,8 @@ try:
 
         submit = st.form_submit_button("Predict Outcomes")
 
-    st.markdown("</div>", unsafe_allow_html=True)
+        st.markdown("</div>", unsafe_allow_html=True)
+        # CARD ENDS
 
     if submit:
         input_data = np.array([[
