@@ -1,7 +1,6 @@
 import streamlit as st
 import joblib
 import numpy as np
-import textwrap
 
 # -----------------------------
 # Page config
@@ -13,161 +12,124 @@ st.set_page_config(
 )
 
 # -----------------------------
-# Styling
+# Styling (CSS ONLY, no HTML structure)
 # -----------------------------
 st.markdown(
-    textwrap.dedent(
-        """
-        <style>
-        /* Base app */
-        .stApp {
-            background: #fbfbfc;
-            color: #111827;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
-        }
+    """
+    <style>
+    .stApp {
+        background: #fbfbfc;
+        color: #111827;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
+    }
 
-        /* Hide Streamlit chrome */
-        #MainMenu {visibility: hidden;}
-        footer {visibility: hidden;}
-        header {visibility: hidden;}
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
 
-        /* Main container */
-        .block-container {
-            max-width: 980px;
-            padding-top: 2rem;
-            padding-bottom: 5rem;
-        }
+    .block-container {
+        max-width: 980px;
+        padding-top: 2rem;
+        padding-bottom: 5rem;
+    }
 
-        /* Header card */
-        .hero {
-            background: #ffffff;
-            border-radius: 18px;
-            padding: 24px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-            margin-bottom: 20px;
-        }
+    /* Header styling */
+    .title-text {
+        font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+        font-size: 34px;
+        line-height: 1.15;
+        margin-bottom: 6px;
+    }
 
-        .hero-byline {
-            font-size: 13px;
-            color: #64748b;
-            margin-bottom: 6px;
-        }
+    .accent {
+        color: #8C1515;
+        font-weight: 800;
+    }
 
-        .hero-title {
-            font-family: Georgia, Cambria, "Times New Roman", Times, serif;
-            font-size: 34px;
-            line-height: 1.15;
-            margin: 0;
-        }
+    .subtitle {
+        color: #475569;
+        font-size: 15px;
+        margin-bottom: 6px;
+    }
 
-        .hero-accent {
-            color: #8C1515;
-            font-weight: 800;
-        }
+    .disclaimer {
+        font-size: 12px;
+        color: #64748b;
+        margin-bottom: 18px;
+    }
 
-        .hero-sub {
-            margin-top: 8px;
-            color: #475569;
-            font-size: 15px;
-        }
+    /* Form card */
+    div[data-testid="stForm"] {
+        background: #ffffff;
+        border-radius: 18px;
+        padding: 22px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    }
 
-        .disclaimer {
-            margin-top: 10px;
-            font-size: 12px;
-            color: #64748b;
-        }
+    .field-label {
+        font-weight: 700;
+        margin: 10px 0 4px 0;
+    }
 
-        /* Style the REAL Streamlit form as the card */
-        div[data-testid="stForm"] {
-            background: #ffffff;
-            border-radius: 18px;
-            padding: 22px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-            margin-top: 0 !important;
-        }
+    div[data-testid="stSelectbox"],
+    div[data-testid="stNumberInput"] {
+        margin-top: -6px;
+        margin-bottom: 14px;
+    }
 
-        /* Field labels */
-        .field-label {
-            font-weight: 700;
-            margin: 10px 0 4px 0;
-            color: #111827;
-        }
-        .field-first {
-            margin-top: 0;
-        }
+    .stFormSubmitButton button {
+        width: 100%;
+        background: #8C1515;
+        color: white;
+        border-radius: 12px;
+        font-weight: 800;
+        padding: 0.75rem;
+        border: none;
+        margin-top: 12px;
+    }
 
-        /* Tighten spacing between labels and inputs */
-        div[data-testid="stSelectbox"],
-        div[data-testid="stNumberInput"] {
-            margin-top: -6px;
-            margin-bottom: 14px;
-        }
+    .results-title {
+        margin-top: 22px;
+        margin-bottom: 14px;
+        font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+        font-size: 20px;
+    }
 
-        /* Submit button */
-        .stFormSubmitButton button {
-            width: 100%;
-            background: #8C1515;
-            color: white;
-            border-radius: 12px;
-            font-weight: 800;
-            padding: 0.75rem;
-            border: none;
-            margin-top: 12px;
-        }
+    .result-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 14px;
+        border-radius: 12px;
+        border: 1px solid #e5e7eb;
+        background: #ffffff;
+        margin-bottom: 8px;
+    }
 
-        /* Results */
-        .results-title {
-            margin-top: 22px;
-            margin-bottom: 14px;
-            font-family: Georgia, Cambria, "Times New Roman", Times, serif;
-            font-size: 20px;
-            color: #111827;
-        }
-
-        .result-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 14px;
-            border-radius: 12px;
-            border: 1px solid #e5e7eb;
-            background: #ffffff;
-            margin-bottom: 8px;
-        }
-
-        .result-name {
-            font-weight: 800;
-        }
-        </style>
-        """
-    ),
+    .result-name {
+        font-weight: 800;
+    }
+    </style>
+    """,
     unsafe_allow_html=True
 )
 
 # -----------------------------
-# Header (FIXED: no markdown code block)
+# Header (NO HTML BLOCKS)
 # -----------------------------
+st.caption("Created by **Louis Massoud, MD**")
+
 st.markdown(
-    textwrap.dedent(
-        """
-        <div class="hero">
-            <div class="hero-byline">
-                Created by <strong>Louis Massoud, MD</strong>
-            </div>
+    '### <span class="title-text">Tibial Limb Salvage <span class="accent">Free Flap</span> Risk Calculator</span>',
+    unsafe_allow_html=True
+)
 
-            <div class="hero-title">
-                Tibial Limb Salvage <span class="hero-accent">Free Flap</span> Risk Calculator
-            </div>
+st.markdown(
+    '<div class="subtitle">Gustilo IIIB/C reconstruction • ML-based complication risk estimates (prototype)</div>',
+    unsafe_allow_html=True
+)
 
-            <div class="hero-sub">
-                Gustilo IIIB/C reconstruction • ML-based complication risk estimates (prototype)
-            </div>
-
-            <div class="disclaimer">
-                For research and demonstration only. Not for clinical decision-making.
-            </div>
-        </div>
-        """
-    ),
+st.markdown(
+    '<div class="disclaimer">For research and demonstration only. Not for clinical decision-making.</div>',
     unsafe_allow_html=True
 )
 
@@ -178,8 +140,7 @@ try:
     model = joblib.load("final_xgboost_model.pkl")
 
     with st.form("input_form"):
-
-        st.markdown('<div class="field-label field-first">Age</div>', unsafe_allow_html=True)
+        st.markdown('<div class="field-label">Age</div>', unsafe_allow_html=True)
         age = st.number_input("", 20, 100, 50, key="age")
 
         st.markdown('<div class="field-label">Sex</div>', unsafe_allow_html=True)
