@@ -12,7 +12,7 @@ st.set_page_config(
 )
 
 # -----------------------------
-# Styling
+# Styling (fixes the empty pill by styling the real form container)
 # -----------------------------
 st.markdown(
     """
@@ -33,7 +33,7 @@ st.markdown(
     .block-container {
         max-width: 980px;
         padding-top: 2rem;
-        padding-bottom: 5rem;   /* ✅ bottom padding so results don't hit edge */
+        padding-bottom: 5rem;  /* bottom breathing room */
     }
 
     /* Header card */
@@ -44,43 +44,44 @@ st.markdown(
         box-shadow: 0 8px 20px rgba(0,0,0,0.06);
         margin-bottom: 20px;
     }
-
     .hero-title {
         font-family: Georgia, Cambria, "Times New Roman", Times, serif;
         font-size: 34px;
         line-height: 1.15;
+        margin: 0;
     }
-
     .hero-accent {
         color: #8C1515;
         font-weight: 800;
     }
-
     .hero-sub {
         margin-top: 8px;
         color: #475569;
         font-size: 15px;
     }
-
     .disclaimer {
         margin-top: 10px;
         font-size: 12px;
         color: #64748b;
     }
 
-    /* Form card */
-    .card {
+    /* ✅ THIS is the real "card": the Streamlit form container */
+    div[data-testid="stForm"] {
         background: #ffffff;
         border-radius: 18px;
         padding: 22px;
         box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        margin-top: 0 !important;
     }
 
     /* Field labels */
     .field-label {
         font-weight: 700;
-        margin: 10px 0 4px 0;
+        margin: 10px 0 4px 0;   /* label close to input */
         color: #111827;
+    }
+    .field-first {
+        margin-top: 0;
     }
 
     /* Tighten spacing between labels and inputs */
@@ -109,7 +110,6 @@ st.markdown(
         font-family: Georgia, Cambria, "Times New Roman", Times, serif;
         font-size: 20px;
     }
-
     .result-row {
         display: flex;
         justify-content: space-between;
@@ -119,7 +119,6 @@ st.markdown(
         background: #ffffff;
         margin-bottom: 8px;
     }
-
     .result-name {
         font-weight: 800;
     }
@@ -155,11 +154,7 @@ try:
     model = joblib.load("final_xgboost_model.pkl")
 
     with st.form("input_form"):
-
-        # Card INSIDE form (prevents empty space above Age)
-        st.markdown('<div class="card">', unsafe_allow_html=True)
-
-        st.markdown('<div class="field-label">Age</div>', unsafe_allow_html=True)
+        st.markdown('<div class="field-label field-first">Age</div>', unsafe_allow_html=True)
         age = st.number_input("", 20, 100, 50, key="age")
 
         st.markdown('<div class="field-label">Sex</div>', unsafe_allow_html=True)
@@ -185,8 +180,6 @@ try:
 
         submit = st.form_submit_button("Predict Outcomes")
 
-        st.markdown("</div>", unsafe_allow_html=True)
-
     if submit:
         input_data = np.array([[
             age,
@@ -211,10 +204,7 @@ try:
             "Hospital Readmission"
         ]
 
-        st.markdown(
-            '<div class="results-title">Predicted complication probabilities</div>',
-            unsafe_allow_html=True
-        )
+        st.markdown('<div class="results-title">Predicted complication probabilities</div>', unsafe_allow_html=True)
 
         for i, outcome in enumerate(outcomes):
             pct = probabilities[i][0][1] * 100
