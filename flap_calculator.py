@@ -171,17 +171,17 @@ try:
     # Form card wrapper
     st.markdown('<div class="card">', unsafe_allow_html=True)
 
-    with st.form(key="input_form"):
-        age = st.number_input("Age", min_value=20, max_value=100, value=50, key="age")
-        sex = st.selectbox("Sex", ["Male", "Female"], key="sex")
-        diabetes = st.selectbox("Diabetes", [0, 1], key="diabetes")
-        cardiovascular = st.selectbox("Cardiovascular Disease", [0, 1], key="cardiovascular")
-        smoking = st.selectbox("Smoking", [0, 1], key="smoking")
-        immunosuppression = st.selectbox("Immunosuppression", [0, 1], key="immunosuppression")
-        albumin = st.number_input("Albumin (g/dL)", min_value=1.0, max_value=5.0, value=3.5, key="albumin")
-        prealbumin = st.number_input("Prealbumin (mg/dL)", min_value=5.0, max_value=50.0, value=20.0, key="prealbumin")
+ with st.form(key="input_form"):
+    age = st.number_input("Age", min_value=20, max_value=100, value=50, key="age")
+    sex = st.selectbox("Sex", ["Male", "Female"], key="sex")
+    diabetes = st.selectbox("Diabetes", [0, 1], key="diabetes")
+    cardiovascular = st.selectbox("Cardiovascular Disease", [0, 1], key="cardiovascular")
+    smoking = st.selectbox("Smoking", [0, 1], key="smoking")
+    immunosuppression = st.selectbox("Immunosuppression", [0, 1], key="immunosuppression")
+    albumin = st.number_input("Albumin (g/dL)", min_value=1.0, max_value=5.0, value=3.5, key="albumin")
+    prealbumin = st.number_input("Prealbumin (mg/dL)", min_value=5.0, max_value=50.0, value=20.0, key="prealbumin")
 
-        submit_button = st.form_submit_button(label="Predict Outcomes")
+    submit_button = st.form_submit_button(label="Predict Outcomes")
 
     st.markdown("</div>", unsafe_allow_html=True)
 
