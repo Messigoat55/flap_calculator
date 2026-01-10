@@ -12,92 +12,114 @@ st.set_page_config(
 )
 
 # -----------------------------
-# Styling
+# Styling (clean + uniform spacing)
 # -----------------------------
 st.markdown(
     """
     <style>
+    /* App base */
     .stApp {
         background: #fbfbfc;
         color: #111827;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
     }
 
+    /* Hide Streamlit chrome */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
 
+    /* Layout */
     .block-container {
         max-width: 980px;
         padding-top: 2rem;
+        padding-bottom: 2rem;
     }
 
+    /* Header card */
     .hero {
-        background: white;
+        background: #ffffff;
         border-radius: 18px;
         padding: 24px;
         box-shadow: 0 8px 20px rgba(0,0,0,0.06);
         margin-bottom: 20px;
     }
-
     .hero-title {
-        font-family: Georgia, serif;
+        font-family: Georgia, Cambria, "Times New Roman", Times, serif;
         font-size: 34px;
+        line-height: 1.15;
+        margin: 0;
     }
-
     .hero-accent {
         color: #8C1515;
-        font-weight: bold;
+        font-weight: 800;
     }
-
     .hero-sub {
-        margin-top: 6px;
+        margin-top: 8px;
         color: #475569;
         font-size: 15px;
     }
-
     .disclaimer {
         margin-top: 10px;
         font-size: 12px;
         color: #64748b;
     }
 
+    /* Form card */
     .card {
-        background: white;
+        background: #ffffff;
         border-radius: 18px;
         padding: 22px;
         box-shadow: 0 8px 20px rgba(0,0,0,0.06);
     }
 
+    /* Uniform field spacing */
+    .field-label {
+        font-weight: 700;
+        margin: 10px 0 4px 0;   /* label sits close to its input */
+        color: #111827;
+    }
+    .field-first {
+        margin-top: 0;          /* first label doesn't add extra top space */
+    }
+
+    /* Pull widgets closer to labels + uniform spacing between fields */
+    div[data-testid="stSelectbox"],
+    div[data-testid="stNumberInput"] {
+        margin-top: -6px;       /* reduce gap between label and input */
+        margin-bottom: 14px;    /* uniform gap between fields */
+    }
+
+    /* Button */
     .stFormSubmitButton button {
         width: 100%;
         background: #8C1515;
         color: white;
         border-radius: 12px;
-        font-weight: 700;
-        padding: 0.7rem;
+        font-weight: 800;
+        padding: 0.75rem;
         border: none;
+        margin-top: 6px;
     }
 
+    /* Results */
     .results-title {
-        margin-top: 20px;
-        font-family: Georgia, serif;
+        margin-top: 22px;
+        margin-bottom: 10px;
+        font-family: Georgia, Cambria, "Times New Roman", Times, serif;
         font-size: 20px;
+        color: #111827;
     }
-
     .result-row {
         display: flex;
         justify-content: space-between;
         padding: 10px 14px;
         border-radius: 12px;
         border: 1px solid #e5e7eb;
-        background: white;
+        background: #ffffff;
         margin-bottom: 8px;
     }
-
-    .result-name {
-        font-weight: 700;
-    }
+    .result-name { font-weight: 800; }
     </style>
     """,
     unsafe_allow_html=True
@@ -129,32 +151,33 @@ st.markdown(
 try:
     model = joblib.load("final_xgboost_model.pkl")
 
+    # IMPORTANT: only ONE card wrapper (prevents the blank empty card)
     st.markdown('<div class="card">', unsafe_allow_html=True)
 
     with st.form("input_form"):
 
-        st.markdown("**Age**")
+        st.markdown('<div class="field-label field-first">Age</div>', unsafe_allow_html=True)
         age = st.number_input("", 20, 100, 50, key="age")
 
-        st.markdown("**Sex**")
+        st.markdown('<div class="field-label">Sex</div>', unsafe_allow_html=True)
         sex = st.selectbox("", ["Male", "Female"], key="sex")
 
-        st.markdown("**Diabetes**")
+        st.markdown('<div class="field-label">Diabetes</div>', unsafe_allow_html=True)
         diabetes = st.selectbox("", ["No", "Yes"], key="diabetes")
 
-        st.markdown("**Cardiovascular Disease**")
+        st.markdown('<div class="field-label">Cardiovascular Disease</div>', unsafe_allow_html=True)
         cardiovascular = st.selectbox("", ["No", "Yes"], key="cvd")
 
-        st.markdown("**Smoking**")
+        st.markdown('<div class="field-label">Smoking</div>', unsafe_allow_html=True)
         smoking = st.selectbox("", ["No", "Yes"], key="smoking")
 
-        st.markdown("**Immunosuppression**")
+        st.markdown('<div class="field-label">Immunosuppression</div>', unsafe_allow_html=True)
         immunosuppression = st.selectbox("", ["No", "Yes"], key="immuno")
 
-        st.markdown("**Albumin (g/dL)**")
+        st.markdown('<div class="field-label">Albumin (g/dL)</div>', unsafe_allow_html=True)
         albumin = st.number_input("", 1.0, 5.0, 3.5, key="albumin")
 
-        st.markdown("**Prealbumin (mg/dL)**")
+        st.markdown('<div class="field-label">Prealbumin (mg/dL)</div>', unsafe_allow_html=True)
         prealbumin = st.number_input("", 5.0, 50.0, 20.0, key="prealbumin")
 
         submit = st.form_submit_button("Predict Outcomes")
