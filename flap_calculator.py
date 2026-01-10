@@ -12,7 +12,7 @@ st.set_page_config(
 )
 
 # -----------------------------
-# Styling (fixes the empty pill by styling the real form container)
+# Styling
 # -----------------------------
 st.markdown(
     """
@@ -33,7 +33,7 @@ st.markdown(
     .block-container {
         max-width: 980px;
         padding-top: 2rem;
-        padding-bottom: 5rem;  /* bottom breathing room */
+        padding-bottom: 5rem;
     }
 
     /* Header card */
@@ -44,28 +44,38 @@ st.markdown(
         box-shadow: 0 8px 20px rgba(0,0,0,0.06);
         margin-bottom: 20px;
     }
+
+    .hero-byline {
+        font-size: 13px;
+        color: #64748b;
+        margin-bottom: 6px;
+    }
+
     .hero-title {
         font-family: Georgia, Cambria, "Times New Roman", Times, serif;
         font-size: 34px;
         line-height: 1.15;
         margin: 0;
     }
+
     .hero-accent {
         color: #8C1515;
         font-weight: 800;
     }
+
     .hero-sub {
         margin-top: 8px;
         color: #475569;
         font-size: 15px;
     }
+
     .disclaimer {
         margin-top: 10px;
         font-size: 12px;
         color: #64748b;
     }
 
-    /* ✅ THIS is the real "card": the Streamlit form container */
+    /* REAL form card (Streamlit form container) */
     div[data-testid="stForm"] {
         background: #ffffff;
         border-radius: 18px;
@@ -77,14 +87,14 @@ st.markdown(
     /* Field labels */
     .field-label {
         font-weight: 700;
-        margin: 10px 0 4px 0;   /* label close to input */
+        margin: 10px 0 4px 0;
         color: #111827;
     }
     .field-first {
         margin-top: 0;
     }
 
-    /* Tighten spacing between labels and inputs */
+    /* Tight label-input spacing */
     div[data-testid="stSelectbox"],
     div[data-testid="stNumberInput"] {
         margin-top: -6px;
@@ -109,7 +119,9 @@ st.markdown(
         margin-bottom: 14px;
         font-family: Georgia, Cambria, "Times New Roman", Times, serif;
         font-size: 20px;
+        color: #111827;
     }
+
     .result-row {
         display: flex;
         justify-content: space-between;
@@ -119,6 +131,7 @@ st.markdown(
         background: #ffffff;
         margin-bottom: 8px;
     }
+
     .result-name {
         font-weight: 800;
     }
@@ -133,12 +146,18 @@ st.markdown(
 st.markdown(
     """
     <div class="hero">
+        <div class="hero-byline">
+            Created by <strong>Louis Massoud, MD</strong>
+        </div>
+
         <div class="hero-title">
             Tibial Limb Salvage <span class="hero-accent">Free Flap</span> Risk Calculator
         </div>
+
         <div class="hero-sub">
             Gustilo IIIB/C reconstruction • ML-based complication risk estimates (prototype)
         </div>
+
         <div class="disclaimer">
             For research and demonstration only. Not for clinical decision-making.
         </div>
@@ -204,7 +223,10 @@ try:
             "Hospital Readmission"
         ]
 
-        st.markdown('<div class="results-title">Predicted complication probabilities</div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="results-title">Predicted complication probabilities</div>',
+            unsafe_allow_html=True
+        )
 
         for i, outcome in enumerate(outcomes):
             pct = probabilities[i][0][1] * 100
