@@ -12,7 +12,7 @@ st.set_page_config(
 )
 
 # -----------------------------
-# Classy "Harvard-like" styling
+# Styling
 # -----------------------------
 st.markdown(
     """
@@ -20,7 +20,7 @@ st.markdown(
     .stApp {
         background: #fbfbfc;
         color: #111827;
-        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont;
     }
 
     #MainMenu {visibility: hidden;}
@@ -28,82 +28,70 @@ st.markdown(
     header {visibility: hidden;}
 
     .block-container {
-        padding-top: 2.2rem;
-        padding-bottom: 2.2rem;
         max-width: 980px;
+        padding-top: 2rem;
     }
 
     .hero {
-        background: #ffffff;
-        border: 1px solid rgba(17,24,39,0.08);
+        background: white;
         border-radius: 18px;
-        padding: 22px 26px;
-        box-shadow: 0 6px 18px rgba(17,24,39,0.06);
-        margin-bottom: 18px;
+        padding: 24px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        margin-bottom: 20px;
     }
 
     .hero-title {
-        font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+        font-family: Georgia, serif;
         font-size: 34px;
-        line-height: 1.15;
-        color: #0f172a;
-        letter-spacing: -0.3px;
     }
 
     .hero-accent {
         color: #8C1515;
-        font-weight: 700;
+        font-weight: bold;
     }
 
-    .hero-subtitle {
-        margin-top: 8px;
-        color: rgba(15,23,42,0.72);
+    .hero-sub {
+        margin-top: 6px;
+        color: #475569;
         font-size: 15px;
     }
 
     .disclaimer {
         margin-top: 10px;
-        color: rgba(15,23,42,0.55);
         font-size: 12px;
+        color: #64748b;
     }
 
     .card {
-        background: #ffffff;
-        border: 1px solid rgba(17,24,39,0.08);
+        background: white;
         border-radius: 18px;
-        padding: 18px;
-        box-shadow: 0 6px 18px rgba(17,24,39,0.06);
-        margin-bottom: 18px;
+        padding: 22px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.06);
     }
 
-    div[data-baseweb="input"] > div,
-    div[data-baseweb="select"] > div {
-        border-radius: 12px !important;
-    }
-
-    .stFormSubmitButton > button {
+    .stFormSubmitButton button {
         width: 100%;
-        border-radius: 12px;
-        padding: 0.7rem;
         background: #8C1515;
         color: white;
+        border-radius: 12px;
         font-weight: 700;
+        padding: 0.7rem;
         border: none;
     }
 
     .results-title {
-        font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+        margin-top: 20px;
+        font-family: Georgia, serif;
         font-size: 20px;
-        margin-bottom: 10px;
     }
 
     .result-row {
         display: flex;
         justify-content: space-between;
-        padding: 10px 12px;
-        border: 1px solid rgba(17,24,39,0.08);
+        padding: 10px 14px;
         border-radius: 12px;
-        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        background: white;
         margin-bottom: 8px;
     }
 
@@ -124,7 +112,7 @@ st.markdown(
         <div class="hero-title">
             Tibial Limb Salvage <span class="hero-accent">Free Flap</span> Risk Calculator
         </div>
-        <div class="hero-subtitle">
+        <div class="hero-sub">
             Gustilo IIIB/C reconstruction • ML-based complication risk estimates (prototype)
         </div>
         <div class="disclaimer">
@@ -136,7 +124,7 @@ st.markdown(
 )
 
 # -----------------------------
-# Main logic
+# App logic
 # -----------------------------
 try:
     model = joblib.load("final_xgboost_model.pkl")
@@ -144,46 +132,45 @@ try:
     st.markdown('<div class="card">', unsafe_allow_html=True)
 
     with st.form("input_form"):
+
         st.markdown("**Age**")
-        age = st.number_input("", 20, 100, 50)
+        age = st.number_input("", 20, 100, 50, key="age")
 
         st.markdown("**Sex**")
-        sex = st.selectbox("", ["Male", "Female"])
+        sex = st.selectbox("", ["Male", "Female"], key="sex")
 
         st.markdown("**Diabetes**")
-        diabetes = st.selectbox("", ["No", "Yes"])
+        diabetes = st.selectbox("", ["No", "Yes"], key="diabetes")
 
         st.markdown("**Cardiovascular Disease**")
-        cardiovascular = st.selectbox("", ["No", "Yes"])
+        cardiovascular = st.selectbox("", ["No", "Yes"], key="cvd")
 
         st.markdown("**Smoking**")
-        smoking = st.selectbox("", ["No", "Yes"])
+        smoking = st.selectbox("", ["No", "Yes"], key="smoking")
 
         st.markdown("**Immunosuppression**")
-        immunosuppression = st.selectbox("", ["No", "Yes"])
+        immunosuppression = st.selectbox("", ["No", "Yes"], key="immuno")
 
         st.markdown("**Albumin (g/dL)**")
-        albumin = st.number_input("", 1.0, 5.0, 3.5)
+        albumin = st.number_input("", 1.0, 5.0, 3.5, key="albumin")
 
         st.markdown("**Prealbumin (mg/dL)**")
-        prealbumin = st.number_input("", 5.0, 50.0, 20.0)
+        prealbumin = st.number_input("", 5.0, 50.0, 20.0, key="prealbumin")
 
         submit = st.form_submit_button("Predict Outcomes")
 
     st.markdown("</div>", unsafe_allow_html=True)
 
     if submit:
-        sex_encoded = 1 if sex == "Male" else 0
-
         input_data = np.array([[
             age,
-            sex_encoded,
+            1 if sex == "Male" else 0,
             1 if diabetes == "Yes" else 0,
             1 if cardiovascular == "Yes" else 0,
             1 if smoking == "Yes" else 0,
             1 if immunosuppression == "Yes" else 0,
             albumin,
-            prealbumin,
+            prealbumin
         ]])
 
         probabilities = model.predict_proba(input_data)
@@ -195,7 +182,7 @@ try:
             "Seroma",
             "Hematoma",
             "Dehiscence",
-            "Hospital Readmission",
+            "Hospital Readmission"
         ]
 
         st.markdown('<div class="results-title">Predicted complication probabilities</div>', unsafe_allow_html=True)
